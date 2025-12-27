@@ -142,6 +142,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="memscan.c" />
+    <ClCompile Include="monitor.c" />
+    <ClCompile Include="secureboot.c" />
+    <ClCompile Include="threadaddrscan.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="memscan.h" />
+    <ClInclude Include="monitor.h" />
+    <ClInclude Include="nacflags.h" />
+    <ClInclude Include="secureboot.h" />
+    <ClInclude Include="threadscan.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

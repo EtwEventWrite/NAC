@@ -1,6 +1,11 @@
 #include <Windows.h>
 #include <TlHelp32.h>
 #include <stdio.h>
+#include "nacflags.h"
+#include "monitor.h"
+#include "memscan.h"
+#include "threadscan.h"
+
 
 typedef HMODULE(WINAPI* LoadLibraryW_t)(LPCWSTR);
 LoadLibraryW_t OriginalLoadLibraryW = NULL;
@@ -15,13 +20,10 @@ volatile BOOL SafePointReached = FALSE;
 
 DWORD WINAPI SafePointThread(LPVOID lpParam) {
 	printf("[safepoint] waiting for UnityPlayer + mono...\n");
-
 	while (!GetModuleHandleA("UnityPlayer.dll")) Sleep(250);
 	while (!GetModuleHandleA("mono-2.0-bdwgc.dll")) Sleep(250);
-
 	printf("[safepoint] mono detected\n");
 	Sleep(5000);
-
 	SafePointReached = TRUE;
 	printf("[safepoint] safe point reached late dll loads will now be blocked\n");
 	return 0;
@@ -229,6 +231,7 @@ BOOL WINAPI DllMain(HINSTANCE hinst, DWORD reason, LPVOID reserved) {
 		IAT_LoadLibraryW(hinst);
 		IAT_LoadLibraryA(hinst);
 
+		CreateThread(NULL, 0, MonitorThread, NULL, 0, NULL);
 		CreateThread(NULL, 0, SafePointThread, NULL, 0, NULL);
 		CreateThread(NULL, 0, HookUnityPlayerThread, NULL, 0, NULL);
 		CreateThread(NULL, 0, LateLoadTestThread, NULL, 0, NULL);

@@ -18,5 +18,34 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="secureboot.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memscan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="threadaddrscan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="monitor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="nacflags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="monitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memscan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="threadscan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="secureboot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
